@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Invitación de Cumpleaños!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title bounce">¡Estás Invitado!</h1>
+            <div class="balloons">
+                <div class="balloon balloon1"></div>
+                <div class="balloon balloon2"></div>
+                <div class="balloon balloon3"></div>
+            </div>
+        </div>
+
+        <div class="photo-container pulse">
+            <img src="plimplim.png" alt="Cumpleañera" class="birthday-photo" onclick="playMusic()">
+            <div class="sparkles">
+                <div class="sparkle sparkle1">✨</div>
+                <div class="sparkle sparkle2">⭐</div>
+                <div class="sparkle sparkle3">✨</div>
+                <div class="sparkle sparkle4">⭐</div>
+            </div>
+        </div>
+
+        <div class="info-card slide-up">
+            <h2 class="name">¡Cumpleaños de Mavie!</h2>
+            <div class="details">
+                <p>📅 <strong>Fecha:</strong> Sábado 04 de Octubre</p>
+                <p>🕕 <strong>Hora:</strong> 15:00 PM</p>
+                <p>🎂 <strong>Edad:</strong> ¡1 año!</p>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <button class="btn btn-location" onclick="openMaps()">
+                📍 Ver Ubicación
+            </button>            
+           
+            <button class="btn btn-confirm" onclick="showConfirmForm()">
+                ✅ Confirmar Asistencia
+            </button>
+            
+            <button class="btn btn-admin" onclick="showAdminPanel()" style="display:none;">
+                📋 Ver Lista
+            </button>
+        </div>
+
+        <div class="confetti">
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Confirmar Asistencia</h3>
+            <form id="confirmForm">
+                <input type="text" id="guestName" placeholder="Ingresa solo tu nombre" required>
+                <input type="tel" id="guestPhone" placeholder="+569 12345678" required>
+                <input type="text" id="guestRut" placeholder="12345678-9" required>
+                <select id="attendance" required>
+                    <option value="">¿Asistirás?</option>
+                    <option value="si">Sí, asistiré</option>
+                    <option value="no">No podré asistir</option>
+                </select>
+                <button type="submit" class="btn btn-submit">Enviar Confirmación</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de administración -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content admin-modal">
+            <span class="close" onclick="closeAdminModal()">&times;</span>
+            <h3>Lista de Confirmaciones</h3>
+            <div class="admin-controls">
+                <button class="btn btn-export" onclick="exportData()">Exportar CSV</button>
+                <button class="btn btn-clear" onclick="clearData()">Limpiar Todo</button>
+            </div>
+            <div id="guestList"></div>
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="s.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
