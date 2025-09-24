@@ -103,12 +103,17 @@ function validatePhone(phone) {
 }
 
 function validateRut(rut) {
-    rut = rut.replace(/[^0-9kK]/g, '');
-    if (rut.length < 8) return false;
+    // Limpiar RUT
+    rut = rut.replace(/[^0-9kK-]/g, '');
     
-    const dv = rut.slice(-1).toUpperCase();
-    const num = rut.slice(0, -1);
+    // Verificar formato básico
+    if (!/^\d{7,8}-[0-9kK]$/i.test(rut)) return false;
     
+    const parts = rut.split('-');
+    const num = parts[0];
+    const dv = parts[1].toUpperCase();
+    
+    // Calcular dígito verificador
     let sum = 0;
     let multiplier = 2;
     
@@ -253,10 +258,23 @@ document.addEventListener('DOMContentLoaded', function() {
     phoneInput.value = '+569';
     
     rutInput.addEventListener('input', function() {
-        let value = this.value.replace(/[^0-9kK]/g, '');
+        let value = this.value.replace(/[^0-9kK-]/g, '');
+        
+        // Remover guiones existentes
+        value = value.replace(/-/g, '');
+        
+        // Formatear automáticamente
         if (value.length > 1) {
-            value = value.slice(0, -1) + '-' + value.slice(-1);
+            const num = value.slice(0, -1);
+            const dv = value.slice(-1);
+            value = num + '-' + dv;
         }
+        
+        // Limitar longitud
+        if (value.length > 10) {
+            value = value.substring(0, 10);
+        }
+        
         this.value = value;
     });
     
