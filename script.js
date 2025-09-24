@@ -58,7 +58,7 @@ window.onclick = function(event) {
 }
 
 // Configuración Google Sheets
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1MSZnJBMsYR_u4ZuKm4G4SuzjnzcRUYbUrrk_k_eBcN8/edit?gid=1292352826#gid=1292352826L_SCRIPT';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyRy_p9yMEOYBxoPtKqhBMiAPw2Pq_wyuOh9wA5zO74Q_d4C-QoP_Ku4JBtaAs0EKJd/exec';
 
 // Guardar datos en Google Sheets
 async function saveConfirmation(formData) {
