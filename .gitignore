@@ -1,0 +1,8 @@
+# Archivos de configuración con tokens
+config.js
+.env
+*.env
+
+# Archivos temporales
+*.tmp
+*.log
