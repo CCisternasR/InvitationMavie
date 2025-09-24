@@ -104,14 +104,14 @@ function validatePhone(phone) {
 
 function validateRut(rut) {
     // Limpiar RUT
-    rut = rut.replace(/[^0-9kK-]/g, '');
+    rut = rut.replace(/[^0-9kK-]/g, '').toUpperCase();
     
     // Verificar formato básico
-    if (!/^\d{7,8}-[0-9kK]$/i.test(rut)) return false;
+    if (!/^\d{7,8}-[0-9K]$/.test(rut)) return false;
     
     const parts = rut.split('-');
     const num = parts[0];
-    const dv = parts[1].toUpperCase();
+    const dv = parts[1];
     
     // Calcular dígito verificador
     let sum = 0;
@@ -119,11 +119,19 @@ function validateRut(rut) {
     
     for (let i = num.length - 1; i >= 0; i--) {
         sum += parseInt(num[i]) * multiplier;
-        multiplier = multiplier === 7 ? 2 : multiplier + 1;
+        multiplier = multiplier > 6 ? 2 : multiplier + 1;
     }
     
-    const remainder = sum % 11;
-    const calculatedDv = remainder < 2 ? remainder.toString() : remainder === 10 ? 'K' : (11 - remainder).toString();
+    const remainder = 11 - (sum % 11);
+    let calculatedDv;
+    
+    if (remainder === 11) {
+        calculatedDv = '0';
+    } else if (remainder === 10) {
+        calculatedDv = 'K';
+    } else {
+        calculatedDv = remainder.toString();
+    }
     
     return dv === calculatedDv;
 }
